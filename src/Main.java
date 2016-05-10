@@ -1,64 +1,44 @@
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class Main {
 
+	/**
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
-
 		Clock c = new Clock();
-    	File f = new File("test.txt");
-    	FileInputStream in;
-		try {
-			in = new FileInputStream(f);
-	        System.out.println(f.length());
-	        byte[] bFile = new byte[(int) f.length()];
-	        in.read(bFile);
-	        /*for(int i = 0; i < f.length(); i++){
-	        	System.out.print(bFile[i]);
-	        }*/
-	        int range = 1000000;
-	        for(int i = 0; i < f.length(); i+=range){
-		        MultithreadingDemo obj = new MultithreadingDemo(i, (int)f.length(), bFile, c);  
-		        Thread tobj = new Thread(obj);  
-		        tobj.start(); 
-	        }
-	        in.close();
-	        
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
+		FileReader fr = new FileReader("DSCF1107.JPG");
+		fr.readFile();
+		ArrayList<Byte> list = new ArrayList<Byte>();
+		for(int i = 0; i < 26; i++){
+			list.add(new Byte("" + (i + 97)));
+			list.add(new Byte("" + (i + 65)));
 		}
+		list.add(new Byte("" + (46)));
+		list.add(new Byte("" + (44)));
+		list.add(new Byte("" + (63)));
+		list.add(new Byte("" + (39)));
+		list.add(new Byte("" + (33)));
+	
+		
+		System.out.println(Converter.byteToChar((byte)63));
+		System.out.println(Converter.charToByte('?'));
+		
+		ArrayList<Byte> resultList = Converter.stringToByteArray("be");
+		System.out.println(resultList.get(0));
+		System.out.println(resultList.get(1));
+		
+		ArrayList<Integer> list01 = fr.byteNumberOfOccurances(Converter.stringToByteArray("abcdefghijklmnopqrstuvwxyz"));
+		for(int i = 0; i < list01.size(); i++){
+			
+			System.out.print(list01.get(i) + " ");
+		}
+		System.out.println();
+		System.out.println("Time: " + c.delta());
+
         
 	}
-	
-	static class MultithreadingDemo implements Runnable{
-		int start;
-		int range;
-		byte[] array;
-		Clock c;
-		public MultithreadingDemo(int start, int range, byte[] array, Clock c){
-			this.start = start;
-			this.range = range;
-			this.array = array;
-			this.c = c;
-		}
-		public void run(){  
-			System.out.println("My thread is in running state.");
-			String s = "";
-			for(int i = start; i < start+range; i++){
-				s += Integer.toBinaryString(array[i]);
-				if(i % 10000 == 0) System.out.println(i);
-			}
-			long time = c.split();
-	        System.out.println("Time: " + time);
-		}   
-	}  
 }
