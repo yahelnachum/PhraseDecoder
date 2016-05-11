@@ -1,3 +1,4 @@
+package application.entities;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -104,20 +105,15 @@ public class FileReader {
 		return results;
 	}*/
 	
-	public ArrayList<Integer> byteNumberOfOccurances(ArrayList<Byte> b){
-		ArrayList<Integer> results = new ArrayList<Integer>();
-		for(int i = 0; i < b.size(); i++){
-			results.add(0);
-		}
+	public void numberOfCharacterOccurrences(ArrayList<CharacterOccurrences> characterOccurrencesList){
 		for(int i = 0; i < bFile.length; i++){
-			for(int j = 0; j < b.size(); j++){
-				if(bFile[i] == b.get(j)){
-					results.set(j, results.get(j)+1);
-					j = b.size();
+			for(int j = 0; j < characterOccurrencesList.size(); j++){
+				if(bFile[i] == characterOccurrencesList.get(j).getByteVersion()){
+					characterOccurrencesList.get(j).incrementOccurrences();
+					j = characterOccurrencesList.size();
 				}
 			}
 		}
-		return results;
 	}
 	
 	public byte[] getByteArray(){
