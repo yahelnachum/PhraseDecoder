@@ -18,12 +18,19 @@ import application.entities.Phrase;
 import application.entities.PhraseManager;
 import application.utilities.Converter;
 
+/**
+ * @author Yahel
+ * Controls the behavior of the drag and drop feature in the application.
+ */
 public class DragAndDropController implements DropTargetListener{
 
 	@Override
 	public void drop(DropTargetDropEvent dtde) {
-		// TODO Auto-generated method stub
+		
+		// change background color
 		MainFrame.getInstanceOfMainFrame().getDragAndDropPanel().setBackground(MainFrame.exitDragColor);
+		
+		// accept drop and get files from drop
 		dtde.acceptDrop(DnDConstants.ACTION_LINK);
 		List files = null;
 		try {
@@ -33,7 +40,7 @@ public class DragAndDropController implements DropTargetListener{
 			e.printStackTrace();
 		}
 		
-		
+		// get the path to the files and decode the phrase
 		if(files != null){
 			File file = (File) files.get(0);
 			String filePath = file.getPath();
@@ -42,6 +49,7 @@ public class DragAndDropController implements DropTargetListener{
 			Phrase currentPhrase = pm.getCurrentPhrase();
 			String phraseText = Converter.charArrayToString(currentPhrase.getDecodedPhrase());
 			
+			// if phrase is fully decoded then turn background to green.
 			PhrasePanel pp = MainFrame.getInstanceOfMainFrame().getPhrasePanel();
 			pp.getPhraseLabel().setText("<html><center>" + phraseText + "</center></html>");
 			if(currentPhrase.phraseFullyDecoded()){
@@ -53,31 +61,22 @@ public class DragAndDropController implements DropTargetListener{
 			
 		}
 		
-		
 		dtde.dropComplete(true);
 	}
 
 	@Override
 	public void dragEnter(DropTargetDragEvent dtde) {
-		// TODO Auto-generated method stub
 		MainFrame.getInstanceOfMainFrame().getDragAndDropPanel().setBackground(MainFrame.enterDragColor);
 	}
 
 	@Override
 	public void dragExit(DropTargetEvent dte) {
-		// TODO Auto-generated method stub
 		MainFrame.getInstanceOfMainFrame().getDragAndDropPanel().setBackground(MainFrame.exitDragColor);
 	}
 
 	@Override
-	public void dragOver(DropTargetDragEvent dtde) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void dragOver(DropTargetDragEvent dtde) {}
 
 	@Override
-	public void dropActionChanged(DropTargetDragEvent dtde) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void dropActionChanged(DropTargetDragEvent dtde) {}
 }

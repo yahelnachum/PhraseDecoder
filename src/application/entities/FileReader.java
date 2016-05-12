@@ -8,16 +8,27 @@ import java.util.Collections;
 import java.util.Random;
 
 
+/**
+ * @author Yahel
+ * FileReader takes in a file name and reads it byte per byte.
+ */
 public class FileReader {
 
 	private File file;
 	private byte[] bFile;
 	
+	/**
+	 * Construct a FileReader with the file name given.
+	 * @param fileName A string representation of the file name.
+	 */
 	public FileReader(String fileName){
 		file = new File(fileName);
 		bFile = new byte[(int) file.length()];
 	}
 	
+	/**
+	 * Read the entire file.
+	 */
 	public void readFile(){
 		try {
 			FileInputStream in = new FileInputStream(file);
@@ -31,7 +42,32 @@ public class FileReader {
 		}
 	}
 	
-/*	public ArrayList<Byte> bytesArePresent(ArrayList<Byte> b){
+	/**
+	 * Get the number of occurrences of each character.
+	 * @param characterOccurrencesList The list of characters to look for.
+	 */
+	public void numberOfCharacterOccurrences(ArrayList<CharacterOccurrences> characterOccurrencesList){
+		for(int i = 0; i < bFile.length; i++){
+			for(int j = 0; j < characterOccurrencesList.size(); j++){
+				if(bFile[i] == characterOccurrencesList.get(j).getByteVersion()){
+					characterOccurrencesList.get(j).incrementOccurrences();
+					j = characterOccurrencesList.size();
+				}
+			}
+		}
+	}
+	
+	/**
+	 * @return The byte array of the entire file.
+	 */
+	public byte[] getByteArray(){
+		return bFile;
+	}
+	
+	/*
+	 * Discarded functions because they did not offer enough interesting behaviors.
+	 * 
+ 	public ArrayList<Byte> bytesArePresent(ArrayList<Byte> b){
 		return bytesArePresent(b, 0, bFile.length);
 	}
 	
@@ -104,19 +140,4 @@ public class FileReader {
 		}
 		return results;
 	}*/
-	
-	public void numberOfCharacterOccurrences(ArrayList<CharacterOccurrences> characterOccurrencesList){
-		for(int i = 0; i < bFile.length; i++){
-			for(int j = 0; j < characterOccurrencesList.size(); j++){
-				if(bFile[i] == characterOccurrencesList.get(j).getByteVersion()){
-					characterOccurrencesList.get(j).incrementOccurrences();
-					j = characterOccurrencesList.size();
-				}
-			}
-		}
-	}
-	
-	public byte[] getByteArray(){
-		return bFile;
-	}
 }

@@ -18,15 +18,12 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HeartLoadingScreen heartFrame = new HeartLoadingScreen();
-					Thread.sleep(2000);
-					heartFrame.dispose();
-					MainFrame frame = MainFrame.getInstanceOfMainFrame();
-					frame.setVisible(true);
+					HeartLoadingScreen heartLoadingScreen = new HeartLoadingScreen();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
+		
 	}
 }

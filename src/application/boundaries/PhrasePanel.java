@@ -14,12 +14,15 @@ import java.awt.Insets;
 
 public class PhrasePanel extends JPanel {
 
-	JLabel phraseLabel;
-	JLabel resetLabel;
+	private JLabel phraseLabel;
+	private JLabel resetLabel;
+	
 	/**
 	 * Create the panel.
 	 */
 	public PhrasePanel() {
+		
+		// set up layout
 		GridBagLayout gbl_phrasePanel = new GridBagLayout();
 		gbl_phrasePanel.columnWidths = new int[]{46, 0};
 		gbl_phrasePanel.rowHeights = new int[]{100, 0, 0};
@@ -27,6 +30,7 @@ public class PhrasePanel extends JPanel {
 		gbl_phrasePanel.rowWeights = new double[]{10.0, 1.0, Double.MIN_VALUE};
 		setLayout(gbl_phrasePanel);
 		
+		// add the phrase label
 		phraseLabel = new JLabel(MainFrame.init_phraseLabelText);
 		phraseLabel.setPreferredSize(new Dimension(300, 200));
 		phraseLabel.setMaximumSize(new Dimension(2000, 1000));
@@ -42,7 +46,8 @@ public class PhrasePanel extends JPanel {
 		gbc_phraseLabel.gridy = 0;
 		add(phraseLabel, gbc_phraseLabel);
 		
-		resetLabel = new JLabel("Press r to get a new random phrase.");
+		// add the reset label but make it invisible
+		resetLabel = new JLabel("Press 'r' to get a new random phrase.");
 		resetLabel.setFont(new Font("Yu Gothic UI", Font.PLAIN, 11));
 		GridBagConstraints gbc_resetLabel = new GridBagConstraints();
 		gbc_resetLabel.gridx = 0;
@@ -51,10 +56,16 @@ public class PhrasePanel extends JPanel {
 		resetLabel.setVisible(false);
 	}
 	
+	/**
+	 * @return Return the phrase label
+	 */
 	public JLabel getPhraseLabel(){
 		return phraseLabel;
 	}
 	
+	/**
+	 * @return Return the reset label
+	 */
 	public JLabel getResetLabel(){
 		return resetLabel;
 	}
