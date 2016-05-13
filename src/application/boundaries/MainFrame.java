@@ -88,8 +88,14 @@ public class MainFrame extends JFrame {
 		//addKeyListener(exitInstructionsPanelController);
 	}
 	
+	/**
+	 * Set up frame after the instructions have been read
+	 */
 	public void afterInstructionsPanel(){
+		// remove everything
 		contentPane.removeAll();
+		
+		// set up new layout
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{208, 0};
 		gbl_contentPane.rowHeights = new int[]{200, 400, 0};
@@ -124,6 +130,7 @@ public class MainFrame extends JFrame {
 		contentPane.getInputMap(contentPane.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("R"), "RESET");
 		contentPane.getActionMap().put("RESET", new RestartPhraseController());
 		
+		// refresh
 		revalidate();
 	}
 	
